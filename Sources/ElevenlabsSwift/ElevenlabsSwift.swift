@@ -74,7 +74,11 @@ public class ElevenlabsSwift {
         let randomFilename = "\(UUID().uuidString).mpg"
         let fileURL = tempDirectoryURL.appendingPathComponent(randomFilename)
         print(data.count)
-        try data.write(to: fileURL)
+        do {
+            try data.write(to: fileURL)
+        } catch let error {
+            print(error.localizedDescription)
+        }
         return fileURL
     }
     
