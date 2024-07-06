@@ -45,10 +45,10 @@ public class ElevenlabsSwift {
         request.setValue(elevenLabsAPI, forHTTPHeaderField: "xi-api-key")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("audio/mpeg", forHTTPHeaderField: "Accept")
-        print("Request is: \(request.description)")
+//        print("Request is: \(request.description)")
 
         let parameters: SpeechRequest = SpeechRequest(text: text, voice_settings: ["stability" : 0, "similarity_boost": 0], model: model)
-        print("parameters are: \(parameters)")
+//        print("parameters are: \(parameters)")
 
         guard let jsonBody = try? JSONEncoder().encode(parameters) else {
             throw WebAPIError.unableToEncodeJSONData
@@ -58,7 +58,7 @@ public class ElevenlabsSwift {
         
         do {
             let (data, _) = try await session.data(for: request)
-            print("Data size \(data)")
+//            print("Data size \(data)")
             
             let url = try self.saveDataToTempFile(data: data)
             
@@ -76,14 +76,7 @@ public class ElevenlabsSwift {
         let randomFilename = "\(UUID().uuidString).mpg"
         let fileURL = tempDirectoryURL.appendingPathComponent(randomFilename)
         do {
-            print("Writing data \(data) to \(fileURL.absoluteString)")
             try data.write(to: fileURL)
-            print("data written")
-            if FileManager.default.fileExists(atPath: fileURL.path) {
-                print("File exists at path: \(fileURL.path)")
-            } else {
-                print("File does not exist at path: \(fileURL.path)")
-            }
 
         } catch let error {
             print("Error: \(error.localizedDescription)")
