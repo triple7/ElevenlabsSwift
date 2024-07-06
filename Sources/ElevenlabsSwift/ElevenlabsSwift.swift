@@ -45,8 +45,10 @@ public class ElevenlabsSwift {
         request.setValue(elevenLabsAPI, forHTTPHeaderField: "xi-api-key")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("audio/mpeg", forHTTPHeaderField: "Accept")
+        print("Request is: \(request.description)")
 
         let parameters: SpeechRequest = SpeechRequest(text: text, voice_settings: ["stability" : 0, "similarity_boost": 0], model: model)
+        print("parameters are: \(parameters)")
 
         guard let jsonBody = try? JSONEncoder().encode(parameters) else {
             throw WebAPIError.unableToEncodeJSONData
@@ -74,12 +76,12 @@ public class ElevenlabsSwift {
         let tempDirectoryURL = FileManager.default.temporaryDirectory
         let randomFilename = "\(UUID().uuidString).mpg"
         let fileURL = tempDirectoryURL.appendingPathComponent(randomFilename)
-        print(data.count)
         do {
             print("Writing data to \(fileURL.absoluteString)")
             try data.write(to: fileURL)
+            print("data written")
         } catch let error {
-            print(error.localizedDescription)
+            print("Error: \(error.localizedDescription)")
         }
         return fileURL
     }
