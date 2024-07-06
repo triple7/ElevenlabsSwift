@@ -43,7 +43,6 @@ public class ElevenlabsSwift {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(elevenLabsAPI, forHTTPHeaderField: "xi-api-key")
-        print("elevenLabsAPI is: \(elevenLabsAPI)")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("audio/mpeg", forHTTPHeaderField: "Accept")
         print("Request is: \(request.description)")
@@ -59,8 +58,9 @@ public class ElevenlabsSwift {
         print("json body is \(String(data: jsonBody, encoding: .utf8))")
 
         do {
-            let (data, _) = try await session.data(for: request)
+            let (data, response) = try await session.data(for: request)
             print(String(data: data, encoding: .utf8))
+            print(response)
             
             let url = try self.saveDataToTempFile(data: data)
             
