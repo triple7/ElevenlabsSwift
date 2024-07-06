@@ -55,11 +55,11 @@ public class ElevenlabsSwift {
         }
         
         request.httpBody = jsonBody
-        print("json body is \(String(data: jsonBody, encoding: .utf8))")
-
+        
         do {
             let (data, response) = try await session.data(for: request)
             print(String(data: data, encoding: .utf8))
+            print("Data size \(data)")
             print(response)
             
             let url = try self.saveDataToTempFile(data: data)
