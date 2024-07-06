@@ -59,7 +59,7 @@ public class ElevenlabsSwift {
 
         do {
             let (data, _) = try await session.data(for: request)
-            print(data)
+            print(String(data: data, encoding: .utf8))
             
             let url = try self.saveDataToTempFile(data: data)
             
