@@ -79,6 +79,12 @@ public class ElevenlabsSwift {
             print("Writing data \(data) to \(fileURL.absoluteString)")
             try data.write(to: fileURL)
             print("data written")
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                print("File exists at path: \(fileURL.path)")
+            } else {
+                print("File does not exist at path: \(fileURL.path)")
+            }
+
         } catch let error {
             print("Error: \(error.localizedDescription)")
         }
