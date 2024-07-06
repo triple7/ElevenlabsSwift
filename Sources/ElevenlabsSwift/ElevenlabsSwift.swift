@@ -43,6 +43,7 @@ public class ElevenlabsSwift {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(elevenLabsAPI, forHTTPHeaderField: "xi-api-key")
+        print("elevenLabsAPI is: \(elevenLabsAPI)")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("audio/mpeg", forHTTPHeaderField: "Accept")
         print("Request is: \(request.description)")
