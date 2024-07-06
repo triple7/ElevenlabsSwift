@@ -57,10 +57,8 @@ public class ElevenlabsSwift {
         request.httpBody = jsonBody
         
         do {
-            let (data, response) = try await session.data(for: request)
-            print(String(data: data, encoding: .utf8))
+            let (data, _) = try await session.data(for: request)
             print("Data size \(data)")
-            print(response)
             
             let url = try self.saveDataToTempFile(data: data)
             
@@ -78,7 +76,7 @@ public class ElevenlabsSwift {
         let randomFilename = "\(UUID().uuidString).mpg"
         let fileURL = tempDirectoryURL.appendingPathComponent(randomFilename)
         do {
-            print("Writing data to \(fileURL.absoluteString)")
+            print("Writing data \(data) to \(fileURL.absoluteString)")
             try data.write(to: fileURL)
             print("data written")
         } catch let error {
