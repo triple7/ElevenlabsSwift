@@ -53,6 +53,7 @@ public class ElevenlabsSwift {
         }
         
         request.httpBody = jsonBody
+        print("json body is \(jsonBody)")
 
         do {
             let (data, _) = try await session.data(for: request)
@@ -75,6 +76,7 @@ public class ElevenlabsSwift {
         let fileURL = tempDirectoryURL.appendingPathComponent(randomFilename)
         print(data.count)
         do {
+            print("Writing data to \(fileURL.absoluteString)")
             try data.write(to: fileURL)
         } catch let error {
             print(error.localizedDescription)
